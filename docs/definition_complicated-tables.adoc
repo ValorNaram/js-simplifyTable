@@ -1,0 +1,17 @@
+= Definition of a "complicated table"
+
+// tag::def_complicated-table_introduction[]
+A table need to meet specified criteria in order to be considered a _complicated table_. This is how the author & maintainer of this library defines the term "complicated table".
+// end::def_complicated-table_introduction[]
+
+// tag::def_complicated-table_criterias[]
+
+.Criterias defining a table as "complicated"
+* Table has some cells which spawn more than one column (column spawn).
+* Table has some cells which spawn more than one row (row span).
+* Table has nested column headers
+* Table has nested row headers
+* Table has more than five columns counting from the row with the most amount of columns in the table
+
+A table defines as "complicated" for the author & maintainer, if at **least two** criterias apply.
+// end::def_complicated-table_criterias[]

@@ -1,0 +1,6 @@
+.vscode
+lab/
+dist_browser/
+dist_nodejs/
+node_modules/
+package-lock.json

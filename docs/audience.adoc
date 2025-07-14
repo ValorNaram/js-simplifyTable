@@ -1,0 +1,38 @@
+= Targeting the audience
+
+Targeting the audience is a crucial step to take before starting the implementation. This documents
+
+. link:#audience-outcall[audiences the initial author & maintainer considered]
+. and link:#audience-influenced-implementation[how the audiences influenced the implementation].
+
+That means the initial author & maintainer did persona-based simulations with the user groups mentioned here. The "more explicit" terms means that there were slight adaptions to the simulation model, to the implementation and to the examples necessary. The "way more explicit" terms means that there were huge adaptions to the simulation model, the implementation and to the examples necessary. The examples have been used for initial tests.
+
+[#audience-outcall]
+== Audience Out-Call
+
+The following list names each audience considered. Some contain a brief clarification.
+
+.User groups (audience) considered during development
+* all users
+* more explicit: users of small screens
+* users with learning difficulties
+* screen reader users
+* more explicit: screen reader users wanting to navigate within easier tables
+* more explicit: screen reader users wanting the choice between complicated tables and easier tables
+* more explicit: users wanting the choice between complicated tables and easier tables
+* more explicit: users wanting to access information in a fast way
+* more explicit: users with concentration & focus difficulties
+* more explicit: blind users using screen readers with ability to see the overall layout of the table without being able to read content without help of assistive technologies (AT)
+* users using screen magnifiers
+* users using the zoom functionality of their viewer application (web browsers)
+* users with problems with multi-dimensional scrolling
+* keyboard users
+* authors of semantic tables
+* way more explicit: authors of tables with nested headings and cells spawning multiple columns and rows
+
+[#audience-influenced-implementation]
+== Influence of implementation
+
+This section explains how each consideration of a single audience influenced the implementation.
+
+TODO: Document the influence by giving each audience a sub heading and body. The body must include the code and explain why it was necessary.

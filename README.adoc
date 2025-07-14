@@ -1,0 +1,50 @@
+= SimpliyTable
+
+A small javascript library to turn complicated tables into easier ones.
+
+.Advantages of `SimplifyTable`
+* [x] Runs in webbrowser and NodeJS environments.
+* [x] Zero dependencies.
+* [x] Can be easily ported to other programming languages.
+* [x] Lightweight.
+* [x] Extensible: Create or use adapters to interact with tabluar data in HTML or CSV.
+* [x] Implementation based on persona-based simulation conducted by a neurodivergent developer with experience with many different user needs. See document link:./docs/audience.adoc[how different needs were considered during development of `SimplifyTable`].
+
+== Usage
+
+=== Turn a complicated table into multuple simple ones
+
+include::docs/definition_complicated-tables.adoc[tags=def_complicated-table_introduction;def_complicated-table_criterias]
+
+The following code shows how the library can be used to simplify a complicated table:
+
+.JS-Code Snippet to turn a complicated table into multuple simple ones
+[source,js]
+----
+// contains JSON object representation of the table model representing a table with nested headers and some cells spawning multiple rows and columns
+// See file `./docs/fairy-safari_complicated-table-model.json` for an example of such a table.
+let complicatedTableModel = /* containing table model of a complicated table */ ;
+
+// normalize table model:
+//		- prepare data for systems not supporting cells spawning multiple rows and columns
+//		- add header information to each cell so each cell knows their column and row level headers
+SimplifyTable.TableModelUtils.addShadowCellsAndHeaderInformationToEachCell(complicatedTableModel);
+
+// generates simple tables out of the table model:
+// Give each last row level header in a row its own table model
+let simpleTablesModels = SimplifyTable.TableModelUtils.generateSimpleTabelModelsOutOfComplicatedcomplicatedTableModel(complicatedTableModel);
+----
+
+=== Turn table into a two-column table
+
+This section needs to be written.
+
+== Documentation
+
+.Resources related to documentation & tutorials
+. link:./docs/model.adoc[Model]
++
+Documents the model used by this library for processing of tables in an implementation-agnostic way. That architecture decision has the advantage that this library not only works for tabular data comming from e.g. HTML tables.
+. link:./docs/audience.adoc[Audiences considered and how they influenced the implementation]
++
+Brief description of the audience in mind as benefitors of this library and its use in the field and how they influenced design & implementation.

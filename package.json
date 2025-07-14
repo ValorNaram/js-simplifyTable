@@ -1,0 +1,35 @@
+{
+  "name": "jssimplifytable",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist_nodejs/index.js",
+  "types": "dist_nodejs/index.d.ts",
+  "files": [
+    "/dist_nodejs"
+  ],
+  "scripts": {
+    "test": "jest",
+    "start": "webpack serve --open --config webpack.dev.js",
+    "tsc": "tsc",
+    "build": "webpack --config webpack.prod.js && npm run tsc"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.0.4",
+    "@types/node": "^20.7.1",
+    "copy-webpack-plugin": "^12.0.2",
+    "html-webpack-plugin": "^5.5.3",
+    "jest": "^30.0.4",
+    "ts-jest": "^29.4.0",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-middleware": "*",
+    "webpack-dev-server": "*",
+    "webpack-merge": "*"
+  },
+  "author": "Sören Reinecke alias Valor Naram",
+  "license": "MIT"
+}

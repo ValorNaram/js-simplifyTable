@@ -1,0 +1,3 @@
+= Model
+
+TODO: Generate documentation of model out of JSDoc

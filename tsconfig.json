@@ -1,0 +1,27 @@
+{ // https://github.com/maplibre/maplibre-gl-js/blob/34623de800d480a11be7db4274523f1860d80396/tsconfig.json
+  "compilerOptions": {
+    "lib": [
+      "ES2021", // "es6",
+      "esnext.asynciterable",
+      "DOM",
+	  "DOM.Iterable"
+    ],
+    "resolveJsonModule": true,
+    "target": "ES6",
+    "checkJs": false,
+    "allowJs": true,
+    "module": "esnext",
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "outDir": "./dist_nodejs",
+    "strict": false,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
