@@ -66,7 +66,8 @@ export namespace Model {
 		/**
 		 * Array of row level headers applying to this row. It contsins all row level header cells this row has in the order of their definition in the model.
 		 */
-		rowHeaders: string[]
+		rowHeaders: string[],
+		tags?: string[]
 	}
 
 	export type Table = {

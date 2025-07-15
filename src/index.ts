@@ -80,7 +80,8 @@ export class TableModelUtils {
 								text: cell.text,
 								rawContent: cell.rawContent,
 								columnHeaders: cell.columnHeaders,
-								rowHeaders: cell.rowHeaders
+								rowHeaders: cell.rowHeaders,
+								tags: cell.tags
 							}
 							rows[row_index].cells.splice(cell_index+index, 0, shadow_cell);
 							this.debug(`      Cells: [${row.cells.map((cell) => cell.type === "shadow" ? `"Cell [SHADOW CELL]: ${cell.text}"` : `"${cell.text}"`)}]`);
@@ -105,7 +106,8 @@ export class TableModelUtils {
 										text: cell.text,
 										rawContent: cell.rawContent,
 										columnHeaders: cell.columnHeaders,
-										rowHeaders: cell.rowHeaders
+										rowHeaders: cell.rowHeaders,
+										tags: cell.tags
 									}
 									rows[row_index+rowspan_index].cells.splice(cell_index+colspan_index, 0, shadow_cell);
 								}
@@ -182,7 +184,7 @@ export class TableModelUtils {
 						duplicatedColumnHeading: false,
 						duplicatedRowHeading: false
 					},
-					tags: []
+					tags: (cell.tags !== undefined ? cell.tags : [])
 				});
 
 				simpleTableRow.cells.push({
@@ -198,7 +200,7 @@ export class TableModelUtils {
 						duplicatedColumnHeading: false,
 						duplicatedRowHeading: false
 					},
-					tags: []
+					tags: (cell.tags !== undefined ? cell.tags : [])
 				});
 
 				simpleTable.tbody.push(simpleTableRow);
