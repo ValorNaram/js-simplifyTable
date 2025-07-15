@@ -22,6 +22,14 @@ export class TableModelUtils {
 	}
 
 	private static normalizeCellsAndAddHeaderInformationToEach(category: "head" | "body" | "foot", rows: Model.Row[], workData: WorkData) {
+		function _copyCellWithChanges(oldCell: Model.Cell, propertiesToChange: {[key: string]: any}): Model.Cell {
+			return {
+				...structuredClone(oldCell),
+				colSpan: 1,
+				rowSpan: 1,
+				...propertiesToChange
+			}
+		}
 		for (let row_index = 0; rows.length > row_index;row_index++) {
 			const row = rows[row_index];
 			this.debug(`Starting with first cell of row ${workData.currentRowIndex} (${category} row index ${row_index})`);
@@ -68,22 +76,19 @@ export class TableModelUtils {
 						// account for cells spawning multiple columns by resolving their colspan value to separate cells internally
 						for (let index = 1;cell.colSpan > index;index++) {
 							this.debug(`      add virtual cell before column index ${cell_index+index} to the current row`);
-							let shadow_cell: Model.Cell = {
-								colSpan: 1,
-								rowSpan: 1,
-								isHeading: cell.isHeading,
-								type: "shadow",
-								shadowAttributes: {
-									duplicatedColumnHeading: false,
-									duplicatedRowHeading: (index == 0 ? false : true)
-								},
-								text: cell.text,
-								rawContent: cell.rawContent,
-								columnHeaders: cell.columnHeaders,
-								rowHeaders: cell.rowHeaders,
-								tags: cell.tags
-							}
-							rows[row_index].cells.splice(cell_index+index, 0, shadow_cell);
+							rows[row_index].cells.splice(
+								cell_index+index,
+								0,
+								_copyCellWithChanges(
+									cell,
+									{
+										type: "shadow",
+										shadowAttributes: {
+											duplicatedColumnHeading: false,
+											duplicatedRowHeading: (index == 0 ? false : true)
+										}
+									}
+								));
 							this.debug(`      Cells: [${row.cells.map((cell) => cell.type === "shadow" ? `"Cell [SHADOW CELL]: ${cell.text}"` : `"${cell.text}"`)}]`);
 						}
 					}
@@ -94,22 +99,21 @@ export class TableModelUtils {
 							for (let colspan_index = 0;cell.colSpan > colspan_index;colspan_index++) {
 								if (rows.length > row_index+rowspan_index) {
 									this.debug(`        add it to next ${category} row ${row_index+rowspan_index} before column index ${cell_index+colspan_index}`)
-									let shadow_cell: Model.Cell = {
-										colSpan: 1,
-										rowSpan: 1,
-										isHeading: cell.isHeading,
-										type: "shadow",
-										shadowAttributes: {
-											duplicatedColumnHeading: (rowspan_index == 0 ? false : true),
-											duplicatedRowHeading: (colspan_index == 0 ? false : true)
-										},
-										text: cell.text,
-										rawContent: cell.rawContent,
-										columnHeaders: cell.columnHeaders,
-										rowHeaders: cell.rowHeaders,
-										tags: cell.tags
-									}
-									rows[row_index+rowspan_index].cells.splice(cell_index+colspan_index, 0, shadow_cell);
+									rows[row_index+rowspan_index].cells.splice(
+										cell_index+colspan_index,
+										0,
+										_copyCellWithChanges(
+											cell,
+											{
+												colSpan: 1,
+												rowSpan: 1,
+												type: "shadow",
+												shadowAttributes: {
+													duplicatedColumnHeading: (rowspan_index == 0 ? false : true),
+													duplicatedRowHeading: (colspan_index == 0 ? false : true)
+												},
+											}
+										));
 								}
 							}
 						}
