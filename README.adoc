@@ -37,7 +37,7 @@ let simpleTablesModels = SimplifyTable.TableModelUtils.generateSimpleTabelModels
 
 === Turn table into a two-column table
 
-This section needs to be written.
+The example code from the previous section can also be used to simplify a table with a single column header with more than two columns into a two-column table. These are better to read on small screens. Just use that table model in the function calls.
 
 == Documentation
 
