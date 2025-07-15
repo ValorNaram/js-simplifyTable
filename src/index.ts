@@ -120,11 +120,6 @@ export class TableModelUtils {
 					}
 				}
 
-				// Header cells which are declared as shadow (hidden) cells are not necessary in the output for responsive tables (turning multi column layout into two-column layout on small screens), so we skip the output generation for them
-				// if (cell.type === "shadow" && (category === "head" || cell.isHeading)) {
-				// 	return
-				// }
-
 				// It is not necessary to equip header cells with data about their relative column and row headers
 				if (cell.isHeading) {
 					cell_index++;
