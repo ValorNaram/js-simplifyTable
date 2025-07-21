@@ -6,7 +6,7 @@
   "main": "dist_nodejs/index.js",
   "types": "dist_nodejs/index.d.ts",
   "files": [
-    "dist_nodejs/"
+    "dist_nodejs"
   ],
   "scripts": {
     "test": "jest",
