@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "start": "webpack serve --open --config webpack.dev.js",
+    "start": "jest",
     "tsc": "tsc",
     "build": "webpack --config webpack.prod.js && npm run tsc"
   },
