@@ -37,9 +37,12 @@ This section explains how each consideration of a single audience influenced the
 
 TODO: Document the influence by going top to bottom in the link:../src/index.ts[Typescript-Code]. Code portions must be included and explained which audiences influenced how.
 
+When creating something, you should definitely aim to make it work for most users. Targeting "all users" is unrealistic but a good vision. This audience targets the end result of the table simplification algorithm: A simple and two-column table. Most if not all users of tables will eventually benefit from this work as they benefit from readability on small screens.
+
+=== Normalization algorithm
+
 TODO: Document audience considerations done during implementation of the 'table normalization algorithm'.
 
-When creating something, you should definitely aim to make it work for most users. Targeting "all users" is unrealistic but a good vision. This audience targets the end result of the table simplification algorithm: A simple and two-column table. Most if not all users of tables will eventually benefit from this work as they benefit from readability on small screens.
 
 === Simplification algorithm
 
