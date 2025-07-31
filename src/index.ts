@@ -144,7 +144,8 @@ export class TableModelUtils {
 			workData.currentRowIndex += 1;
 		}
 	}
-
+// tag::simplification-algorithm[]
+// this is the 'simplification algorithm' which has the 'normalization algorithm' as its only dependency
 	public static generateSimpleTabelModelsOutOfTableModelRows(rows: Model.Row[]) {
 		let simpleTables: Model.Table[] = [];
 		for (let row of rows) {
@@ -219,6 +220,7 @@ export class TableModelUtils {
 
 		return tableModels;
 	}
+// end::simplification-algorithm[]
 
 	public static addShadowCellsAndHeaderInformationToEachCell(table: Model.Table) {
 		let workData: WorkData = {

@@ -1,14 +1,14 @@
 = Targeting the audience
 
-Targeting the audience is a crucial step to take before starting the implementation. This documents
+Targeting the audience is a superior task before the implementation. This documents describes
 
-. link:#audience-outcall[audiences the initial author & maintainer considered]
+. link:#audience-considered[the audiences the initial author & maintainer considered] and
 . and link:#audience-influenced-implementation[how the audiences influenced the implementation].
 
 That means the initial author & maintainer did persona-based simulations with the user groups mentioned here. The "more explicit" terms means that there were slight adaptions to the simulation model, to the implementation and to the examples necessary. The "way more explicit" terms means that there were huge adaptions to the simulation model, the implementation and to the examples necessary. The examples have been used for initial tests.
 
-[#audience-outcall]
-== Audience Out-Call
+[#audience-considered]
+== Audience considered
 
 The following list names each audience considered. Some contain a brief clarification.
 
@@ -35,4 +35,62 @@ The following list names each audience considered. Some contain a brief clarific
 
 This section explains how each consideration of a single audience influenced the implementation.
 
-TODO: Document the influence by giving each audience a sub heading and body. The body must include the code and explain why it was necessary.
+TODO: Document the influence by going top to bottom in the link:../src/index.ts[Typescript-Code]. Code portions must be included and explained which audiences influenced how.
+
+TODO: Document audience considerations done during implementation of the 'table normalization algorithm'.
+
+When creating something, you should definitely aim to make it work for most users. Targeting "all users" is unrealistic but a good vision. This audience targets the end result of the table simplification algorithm: A simple and two-column table. Most if not all users of tables will eventually benefit from this work as they benefit from readability on small screens.
+
+=== Simplification algorithm
+
+[source,ts]
+----
+include::../src/index.ts[tags=simplification-algorithm]
+----
+
+It returns a list of simple table models out of the complicated table model. It iterates over each row of the normalized complicated table model and rearranges the cells in a way that the output are rows containing only two cells (means two columns per row only).
+
+It requires the public function `addShadowCellsAndHeaderInformationToEachCell` to be called first on the complicated table model you want to create simple table models out of.
+
+It considers the following audiences
+
+[%header]
+|===
+|Name of the audience|How the audience influenced the implementation
+
+|Users of small screens
+|The function turns a complicated table model with more than _two_ columns to a simple table layout with two columns per row. This shrinks the table so it fits on most small screens such as those found on smartphones.
+
+|users with learning difficulties
+|Small tables with just two columns are easier to read than tables with more than two columns, nested headers and cells spawning more than just one row or column.
+
+|screen reader users
+.3+|The 'simplification algorithm' is optional to call. The overall design of this library leaves choices to developers: They do not have to use the simplification algorithm. This enables them to provide their end user with the option to turn on or off simplification of tables. Such an option could be a checkbox above every table which end users can use to toggle display of simple tables instead of the complicated one. See https://github.com/ValorNaram/js-simplifyHTMLTable[JS-SimplifyHTMLTable] which has a checkbox to toggle between simple and complicated tables. This also enables a screen reader users to choose between complicated tables and simple tables influencing their own appeal and speed of navigation over the contents of a table.
+|more explicit: screen reader users wanting to navigate within easier tables
+|more explicit: screen reader users wanting the choice between complicated tables and easier tables
+
+|more explicit: users wanting to access information in a fast way
+|Simple tables are easier and faster to understand. Ideal if you're on the rush.
+
+|more explicit: users with concentration & focus difficulties|Users facing difficulties focusing themselves might find a table with just two columns more appealing than a table with more than two columns, nested headers and cells spawning more than just one row or column.
+
+|more explicit: blind users using screen readers with ability to see the overall layout of the table without being able to read content without help of assistive technologies (AT)
+|Screen reader users with little sight will eventually be able to spot the difference between a complicated table and a simple table visually and can judge what kind of table layout they find most appealing. Especially if they try out navigating in both versions using their assistive technology.
+
+|users using screen magnifiers|Those users will eventually find tables with less columns easier to read because they don't have to scroll horizontally or need to use just a little bit of horizontal scrolling. So they have more energy on reading, understanding and vertical scrolling.
+
+|users using the zoom functionality of their viewer application (web browsers)
+|Scaling tables with many columns to a greater zoom level does not work well. Tables with just two-columns are more easy to scale.
+
+|users with problems with multi-dimensional scrolling
+|Some find it difficult to use horizontal scrolling in order to reach to the columns obfuscated by the viewport. Tables with just two columns remove that need in most cases.
+
+|keyboard users
+|In some rare cases users need a visual clue where they are or stepped of e.g. for a lunch. They use the mouse mostly. Simple tables with just two-columns should remove the need of a mouse for visually need. Keyboard users would highlight the part using keyboard shortcuts where they stepped of and use that for their visual clue. This is a very weak audience consideration.
+
+|authors of semantic tables
+|Authors of tables will see that it makes sense to go the extra mile to create semantic tables as those are the ones this library and their dependants like https://github.com/ValorNaram/js-simplifyHTMLTable[JS-SimplifyHTMLTable] can process best. Semantic complicated tables can be converted to simple tables without loss of information and context. This is beneficial for the authors as they can reach more people with their work without putting too much extra effort in their tabular work.
+
+|way more explicit: authors of tables with nested headings and cells spawning multiple columns and rows
+|The simplification algorithm uses the shadow cells provided by the normalization algorithm to be able to create simple tables even if the authors of the input complicated table used nested headings and cells spawning multiple columns and rows. Without that consideration the simplification algorithm would have just been there to turn a table in a two-column layout without proper handling of nested headings and cell spawning over columns and rows leading to improper tables.
+|===
